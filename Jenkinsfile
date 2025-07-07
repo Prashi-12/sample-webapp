@@ -32,7 +32,8 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    sh "docker run -d -p 8080:8080 $IMAGE_NAME"
+                    // Changed host port from 8080 to 8081 to avoid conflict with Jenkins
+                    sh "docker run -d -p 8081:8080 $IMAGE_NAME"
                 }
             }
         }
