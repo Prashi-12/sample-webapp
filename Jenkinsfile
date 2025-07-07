@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = Docker_credentials
+        DOCKER_HUB_CREDENTIALS = 'Docker_credentials'
         IMAGE_NAME = 'prashanth120398/sample-webapp'
     }
 
