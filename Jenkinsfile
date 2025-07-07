@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = 'Docker_credentials'
         IMAGE_NAME = 'prashanth120398/sample-webapp'
     }
 
@@ -23,8 +22,8 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                script {
-                    sh "echo $DOCKER_HUB_CREDENTIALS_PSW | docker login -u $DOCKER_HUB_CREDENTIALS_USR --password-stdin"
+                withCredentials([usernamePassword(credentialsId: 'Docker_credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "echo \$DOCKER_PASSWORD | docker login -u \$DOCKER_USERNAME --password-stdin"
                     sh "docker push $IMAGE_NAME"
                 }
             }
